@@ -8,10 +8,11 @@ const deleteCard = function (evt) {
     eventTarget.parentElement.remove();
 };
 
-function card(item, deleteCard) {
+function createCard(item, deleteCard) {
     const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
-    cardItem.querySelector('.card__image').src = item.link;
-    cardItem.querySelector('.card__image').alt = item.name;
+    const cardImage = cardItem.querySelector('.card__image');
+    cardImage.src = item.link;
+    cardImage.alt = item.name; 
     cardItem.querySelector('.card__title').textContent = item.name;
 
     cardItem.querySelector('.card__delete-button').addEventListener('click', deleteCard);
@@ -20,7 +21,7 @@ function card(item, deleteCard) {
 }
 
 initialCards.forEach((item) => {
-    const cardElement = card(item, deleteCard);
+    const cardElement = createCard(item, deleteCard);
     cardList.append(cardElement);
 });
 
