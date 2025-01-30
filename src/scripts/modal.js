@@ -2,23 +2,20 @@
 //ф-ция открытия МО
 function openPopup(popup) {
     popup.classList.add("popup_is-opened");
-    popup.querySelector('.popup__close').addEventListener('click', function () {
-        closePopup(popup);
-    });
-    document.addEventListener("keydown", escClosePopup)
-    popup.addEventListener("click", mouseClosePopup);
+    document.addEventListener("keydown", closePopupEsc);
+    popup.addEventListener("mousedown", closePopupMouse);
 
 }
 
 //ф-ция закрытия МО
 function closePopup(popup) {
     popup.classList.remove("popup_is-opened");
-    document.removeEventListener("keydown", escClosePopup);
-    popup.removeEventListener("click", mouseClosePopup);
+    document.removeEventListener("keydown", closePopupEsc);
+    popup.removeEventListener("mousedown", closePopupMouse);
 }
 
 //ф-ция закрытия МО по кнопке esc
-function escClosePopup(evt) {
+function closePopupEsc(evt) {
     if (evt.key === "Escape") {
         const popupOpen = document.querySelector(".popup_is-opened");
         closePopup(popupOpen);
@@ -26,12 +23,15 @@ function escClosePopup(evt) {
 }
 
 //ф-ция закрытия МО кликом на оверлей
-function mouseClosePopup(evt) {
+function closePopupMouse(evt) {
     if (evt.target === evt.currentTarget) {
         const popupOpen = document.querySelector(".popup_is-opened");
         closePopup(popupOpen);
     }
 }
 
+const setModalWindowEventListener = (popup) => {
+    popup.querySelector('.popup__close').addEventListener('click', () => closePopup(popup));
+}
 
-export { openPopup, closePopup };
+export { openPopup, closePopup, setModalWindowEventListener };

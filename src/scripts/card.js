@@ -1,27 +1,20 @@
-import { openPopup } from "./modal";
-
 const cardTemplate = document.querySelector('#card-template').content;
 
 
 // удаление карточки
-const deleteCard = function (evt) {
-    const eventTarget = evt.target;
-    eventTarget.parentElement.remove();
+const onDeleteCard = function (cardElement) {
+    cardElement.remove();
 };
 
 
 // функция Like
-const doLike = function (evt) {
+const onLikeCard = function (evt) {
     const likeTarget = evt.target;
-    if (!likeTarget.classList.contains("card__like-button_is-active")) {
-        likeTarget.classList.add("card__like-button_is-active");
-    } else {
-        likeTarget.classList.remove("card__like-button_is-active");
-    }
+    likeTarget.classList.toggle("card__like-button_is-active");
 }
 
 // Создание карточки
-function createCard(item, deleteCard, doLike, openPopupImage) {
+function createCard(item, {onDeleteCard, onLikeCard, onOpenPreview} = {}) {
     const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
     const cardImage = cardItem.querySelector('.card__image');
     const btnLike = cardItem.querySelector('.card__like-button');
@@ -29,13 +22,13 @@ function createCard(item, deleteCard, doLike, openPopupImage) {
     cardImage.alt = item.name;
     cardItem.querySelector('.card__title').textContent = item.name;
 
-    cardItem.querySelector('.card__delete-button').addEventListener('click', deleteCard);
+    cardItem.querySelector('.card__delete-button').addEventListener('click', () => onDeleteCard(cardItem));
 
-    cardImage.addEventListener('click', openPopupImage);
+    cardImage.addEventListener('click', onOpenPreview);
 
-    btnLike.addEventListener('click', doLike);
+    btnLike.addEventListener('click', onLikeCard);
 
     return cardItem;
 }
 
-export { createCard, deleteCard, doLike };
+export { createCard, onDeleteCard, onLikeCard };
