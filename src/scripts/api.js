@@ -6,7 +6,7 @@ const config = {
     }
 };
 
-function thenResJson(res) {
+function returnResJson(res) {
     if (res.ok) {
         return res.json();
     }
@@ -17,14 +17,14 @@ function getUser() {
     return fetch(`${config.baseUrl}/users/me`, {
         headers: config.headers
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 }
 
 function getInitialCards() {
     return fetch(`${config.baseUrl}/cards`, {
         headers: config.headers
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 }
 
 
@@ -37,7 +37,7 @@ function renameUser(user) {
             about: user.description
         })
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 }
 
 function addNewCard(card) {
@@ -49,7 +49,7 @@ function addNewCard(card) {
             link: card.link
         })
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 
 }
 
@@ -58,7 +58,7 @@ function deleteCard(card) {
         method: 'DELETE',
         headers: config.headers
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 
 }
 
@@ -67,7 +67,7 @@ function putLike(card) {
         method: 'PUT',
         headers: config.headers
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 }
 
 function removeLike(card) {
@@ -75,7 +75,7 @@ function removeLike(card) {
         method: 'DELETE',
         headers: config.headers
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 }
 
 function trueOrFalseURL(url) {
@@ -104,7 +104,7 @@ function addNewAvatar(avatar) {
             avatar: avatar
         })
     })
-        .then((res) => thenResJson(res))
+        .then(returnResJson)
 }
 
 

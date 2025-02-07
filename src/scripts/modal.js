@@ -12,10 +12,6 @@ function closePopup(popup) {
     popup.classList.remove("popup_is-opened");
     document.removeEventListener("keydown", closePopupEsc);
     popup.removeEventListener("mousedown", closePopupMouse);
-    const form = popup.querySelector('form');
-    if (form) {
-        form.reset();
-    }
 }
 
 //ф-ция закрытия МО по кнопке esc
@@ -29,8 +25,7 @@ function closePopupEsc(evt) {
 //ф-ция закрытия МО кликом на оверлей
 function closePopupMouse(evt) {
     if (evt.target === evt.currentTarget) {
-        const popupOpen = document.querySelector(".popup_is-opened");
-        closePopup(popupOpen);
+        closePopup(evt.target); 
     }
 }
 
