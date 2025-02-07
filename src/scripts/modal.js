@@ -12,6 +12,10 @@ function closePopup(popup) {
     popup.classList.remove("popup_is-opened");
     document.removeEventListener("keydown", closePopupEsc);
     popup.removeEventListener("mousedown", closePopupMouse);
+    const form = popup.querySelector('form');
+    if (form) {
+        form.reset();
+    }
 }
 
 //ф-ция закрытия МО по кнопке esc
